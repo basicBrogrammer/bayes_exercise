@@ -19,7 +19,10 @@ class Bayes(object):
 
         Makes the sum of the probabilities equal 1.
         '''
-        pass
+        total = sum(self.prior.values())
+
+        for k, v in self.prior.items():
+            self.prior[k] = self.prior[k] / total
 
     def update(self, data):
         '''
@@ -31,10 +34,16 @@ class Bayes(object):
         Conduct a bayesian update. Multiply the prior by the likelihood and
         make this the new prior.
         '''
-        pass
+        for die, prior in self.prior.items():
+            self.prior[die] = self.prior[die] * self.likelihood_func(data, die)
+            # fair_posterior = (p_fair_prior * p_head_fair)
+
+        self.normalize()
+
 
     def print_distribution(self):
         '''
         Print the current posterior probability.
         '''
-        pass
+        for die, prior in self.prior.items():
+            print('For die {} the posterior prob is {}'.format(die, prior))
