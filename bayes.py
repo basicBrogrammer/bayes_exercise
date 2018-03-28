@@ -7,10 +7,10 @@ class Bayes(object):
         likelihood_func (function): takes a new piece of data and the value and
                                     outputs the likelihood of getting that data
     '''
+
     def __init__(self, prior, likelihood_func):
         self.prior = prior
         self.likelihood_func = likelihood_func
-
 
     def normalize(self):
         '''
@@ -40,10 +40,10 @@ class Bayes(object):
 
         self.normalize()
 
-
     def print_distribution(self):
         '''
         Print the current posterior probability.
         '''
-        for die, prior in self.prior.items():
-            print('For die {} the posterior prob is {}'.format(die, prior))
+        for key in sorted(self.prior.keys()):
+            print('For die {} the posterior prob is {}'.format(
+                key, self.prior[key]))
